@@ -1,0 +1,1 @@
+1. the cafoa amount should be automatic based on the total amount of responsibility center

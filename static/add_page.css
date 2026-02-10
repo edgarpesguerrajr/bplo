@@ -1,0 +1,255 @@
+.main-content .header-add {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.main-content .header-add h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-right: 5px;
+}
+
+.page-title{
+    display: flex;
+    align-self: auto;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.breadcrumb .material-symbols-rounded {
+    font-size: 1.5rem;
+    color: var(--color-text-placeholder);
+}
+
+.breadcrumb span {
+    font-size: 1rem;
+    color: var(--color-text-placeholder);
+}
+
+.card.responsibility-section {
+    background: var(--color-bg-primary);
+    border-radius: 8px;
+    box-shadow: 0 5px 3px var(--color-shadow);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+
+.form-title h2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--color-text-primary);
+}
+
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: var(--color-text-primary);
+}
+
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--color-border-hr);
+    border-radius: 6px;
+    background: var(--color-bg-secondary);
+    font-size: 1rem;
+    color: var(--color-text-primary);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--color-hover-primary);
+    box-shadow: 0 0 5px var(--color-shadow);
+    outline: none;
+}
+
+textarea {
+    resize: none;
+}
+
+
+.form-row-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 20px;
+}
+
+.form-row-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
+}
+
+.form-row-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px;
+}
+
+.office-row {
+    margin-bottom: 12px;
+}
+
+
+
+.responsibility-section h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--color-text-primary);
+}
+
+.btn {
+    display: inline-block;
+    background: var(--color-hover-primary);
+    color: var(--color-bg-primary);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background: #4C3FD9;
+}
+
+.remove-office-btn {
+    margin-top: 8px;
+    background: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border-hr);
+    font-size: 0.9rem;
+    padding: 8px 12px;
+}
+
+.remove-office-btn:hover {
+    background: var(--color-hover-secondary);
+}
+
+.cancel-btn {
+    background: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+}
+
+.cancel-btn:hover {
+    background: var(--color-hover-secondary);
+}
+
+
+.claimed {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.claimed .form-row-2 {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 12px;
+}
+
+.claimed .form-row-2 label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 0;
+    white-space: nowrap;
+}
+
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 80px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.toggle-switch input[type="checkbox"] {
+    display: none;
+}
+
+.toggle-switch-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ddd;
+    border-radius: 20px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.toggle-switch-handle {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 30px;
+    height: 30px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.toggle-switch input[type="checkbox"]:checked + .toggle-switch-background {
+    background-color: var(--color-hover-primary);
+}
+
+.toggle-switch input[type="checkbox"]:checked + .toggle-switch-background .toggle-switch-handle {
+    transform: translateX(40px);
+}
+
+
+#claimed-date {
+    display: none;
+}
+
+
+.no-arrows::-webkit-outer-spin-button,
+.no-arrows::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr; 
+    }
+
+    .breadcrumb {
+        flex-direction: column; 
+        gap: 2px;
+    }
+
+    .btn {
+        width: 100%; 
+        text-align: center;
+    }
+}
