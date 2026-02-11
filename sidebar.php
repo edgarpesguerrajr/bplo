@@ -35,12 +35,6 @@
                         <span class="menu-label">Documents</span>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="template.php?page=report" class="menu-link <?= $page === 'report' ? 'active' : '' ?>">
-                        <span class="material-symbols-rounded">insert_chart</span>
-                        <span class="menu-label">Reports</span>
-                    </a>
-                </li>
                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
                     <li class="menu-item">
                         <a href="template.php?page=users" class="menu-link <?= $page === 'users' ? 'active' : '' ?>">

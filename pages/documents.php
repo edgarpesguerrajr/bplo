@@ -36,6 +36,11 @@ $barangayFilter = trim($_GET['barangay'] ?? '');
 $statusFilter = trim($_GET['status'] ?? '');
 $offset = ($page - 1) * $perPage;
 
+// Sorting parameters
+$validSortColumns = ['franchise_no', 'franchisee_first_name', 'barangay', 'expiration_date'];
+$sortBy = isset($_GET['sortBy']) && in_array($_GET['sortBy'], $validSortColumns) ? $_GET['sortBy'] : 'franchise_no';
+$sortDir = isset($_GET['sortDir']) && $_GET['sortDir'] === 'ASC' ? 'ASC' : 'DESC';
+
 $totalDocuments = 0;
 $whereClauses = [];
 $params = [];
@@ -88,7 +93,7 @@ $offset = (int)$offset;
 $listSql = "SELECT id, franchise_no, franchisee_first_name, franchisee_last_name, barangay, expiration_date
             FROM documents
             {$whereSql}
-            ORDER BY franchise_no DESC
+            ORDER BY {$sortBy} {$sortDir}
             LIMIT ? OFFSET ?";
 $stmt = $conn->prepare($listSql);
 if ($stmt) {
@@ -193,10 +198,36 @@ if ($stmt) {
 
         .pagination-controls .pagination-btn.active {
             font-weight: 600;
-            background-color: var(--color-primary);
+            background-color: var(--color-hover-primary);
             color: white;
-            border-color: var(--color-primary);
+            border-color: var(--color-hover-primary);
             pointer-events: none;
+        }
+
+        .documents-table thead th {
+            padding: 0;
+        }
+
+        .sort-header {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            padding: 12px;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.2s ease;
+        }
+
+        .sort-header:hover {
+            background-color: var(--color-hover-secondary);
+        }
+
+        .sort-indicator {
+            display: inline-block;
+            margin-left: 6px;
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            min-width: 16px;
         }
 
     </style>
@@ -228,11 +259,11 @@ if ($stmt) {
                 <option value="CAYABU" <?php echo $barangayFilter === 'CAYABU' ? 'selected' : ''; ?>>CAYABU</option>
                 <option value="CAYUMBAY" <?php echo $barangayFilter === 'CAYUMBAY' ? 'selected' : ''; ?>>CAYUMBAY</option>
                 <option value="DARAITAN" <?php echo $barangayFilter === 'DARAITAN' ? 'selected' : ''; ?>>DARAITAN</option>
-                <option value="KATIPUNAN-BAYANI" <?php echo $barangayFilter === 'KATIPUNAN-BAYANI' ? 'selected' : ''; ?>>KATIPUNAN-BAYANI</option>
+                <option value="KATIPUNAN BAYANI" <?php echo $barangayFilter === 'KATIPUNAN BAYANI' ? 'selected' : ''; ?>>KATIPUNAN BAYANI</option>
                 <option value="KAYBUTO" <?php echo $barangayFilter === 'KAYBUTO' ? 'selected' : ''; ?>>KAYBUTO</option>
                 <option value="LAIBAN" <?php echo $barangayFilter === 'LAIBAN' ? 'selected' : ''; ?>>LAIBAN</option>
                 <option value="MADILAYDILAY" <?php echo $barangayFilter === 'MADILAYDILAY' ? 'selected' : ''; ?>>MADILAYDILAY</option>
-                <option value="MAG-AMPON" <?php echo $barangayFilter === 'MAG-AMPON' ? 'selected' : ''; ?>>MAG-AMPON</option>
+                <option value="MAG AMPON" <?php echo $barangayFilter === 'MAG AMPON' ? 'selected' : ''; ?>>MAG AMPON</option>
                 <option value="MAMUYAO" <?php echo $barangayFilter === 'MAMUYAO' ? 'selected' : ''; ?>>MAMUYAO</option>
                 <option value="PINAGKAMALIGAN" <?php echo $barangayFilter === 'PINAGKAMALIGAN' ? 'selected' : ''; ?>>PINAGKAMALIGAN</option>
                 <option value="PLAZA ALDEA" <?php echo $barangayFilter === 'PLAZA ALDEA' ? 'selected' : ''; ?>>PLAZA ALDEA</option>
@@ -240,7 +271,7 @@ if ($stmt) {
                 <option value="SAN ANDRES" <?php echo $barangayFilter === 'SAN ANDRES' ? 'selected' : ''; ?>>SAN ANDRES</option>
                 <option value="SAN ISIDRO" <?php echo $barangayFilter === 'SAN ISIDRO' ? 'selected' : ''; ?>>SAN ISIDRO</option>
                 <option value="SANTA INEZ" <?php echo $barangayFilter === 'SANTA INEZ' ? 'selected' : ''; ?>>SANTA INEZ</option>
-                <option value="SANTO NIÑO" <?php echo $barangayFilter === 'SANTO NIÑO' ? 'selected' : ''; ?>>SANTO NIÑO</option>
+                <option value="STO NIÑO" <?php echo $barangayFilter === 'STO NIÑO' ? 'selected' : ''; ?>>STO NIÑO</option>
                 <option value="TABING ILOG" <?php echo $barangayFilter === 'TABING ILOG' ? 'selected' : ''; ?>>TABING ILOG</option>
                 <option value="TANDANG KUTYO" <?php echo $barangayFilter === 'TANDANG KUTYO' ? 'selected' : ''; ?>>TANDANG KUTYO</option>
                 <option value="TINUCAN" <?php echo $barangayFilter === 'TINUCAN' ? 'selected' : ''; ?>>TINUCAN</option>
@@ -256,11 +287,27 @@ if ($stmt) {
         <table class="documents-table">
             <thead>
                 <tr>
-                    <th>FRANCHISE NO.</th>
-                    <th>FRANCHISEE NAME</th>
-                    <th>BARANGAY</th>
-                    <th>STATUS</th>
-                    <th>ACTIONS</th>
+                    <th style="width: 15%;">
+                        <a class="sort-header" href="?page=documents&sortBy=franchise_no&sortDir=<?php echo ($sortBy === 'franchise_no' && $sortDir === 'DESC') ? 'ASC' : 'DESC'; ?><?php echo $hasSearch ? '&q=' . urlencode($searchTerm) : ''; ?><?php echo $barangayFilter ? '&barangay=' . urlencode($barangayFilter) : ''; ?><?php echo $statusFilter ? '&status=' . urlencode($statusFilter) : ''; ?>">
+                            FRANCHISE NO. <span class="sort-indicator"><?php echo ($sortBy === 'franchise_no') ? ($sortDir === 'DESC' ? '▼' : '▲') : ''; ?></span>
+                        </a>
+                    </th>
+                    <th style="width: 30%;">
+                        <a class="sort-header" href="?page=documents&sortBy=franchisee_first_name&sortDir=<?php echo ($sortBy === 'franchisee_first_name' && $sortDir === 'DESC') ? 'ASC' : 'DESC'; ?><?php echo $hasSearch ? '&q=' . urlencode($searchTerm) : ''; ?><?php echo $barangayFilter ? '&barangay=' . urlencode($barangayFilter) : ''; ?><?php echo $statusFilter ? '&status=' . urlencode($statusFilter) : ''; ?>">
+                            FRANCHISEE NAME <span class="sort-indicator"><?php echo ($sortBy === 'franchisee_first_name') ? ($sortDir === 'DESC' ? '▼' : '▲') : ''; ?></span>
+                        </a>
+                    </th>
+                    <th style="width: 20%;">
+                        <a class="sort-header" href="?page=documents&sortBy=barangay&sortDir=<?php echo ($sortBy === 'barangay' && $sortDir === 'DESC') ? 'ASC' : 'DESC'; ?><?php echo $hasSearch ? '&q=' . urlencode($searchTerm) : ''; ?><?php echo $barangayFilter ? '&barangay=' . urlencode($barangayFilter) : ''; ?><?php echo $statusFilter ? '&status=' . urlencode($statusFilter) : ''; ?>">
+                            BARANGAY <span class="sort-indicator"><?php echo ($sortBy === 'barangay') ? ($sortDir === 'DESC' ? '▼' : '▲') : ''; ?></span>
+                        </a>
+                    </th>
+                    <th style="width: 15%;">
+                        <a class="sort-header" href="?page=documents&sortBy=expiration_date&sortDir=<?php echo ($sortBy === 'expiration_date' && $sortDir === 'DESC') ? 'ASC' : 'DESC'; ?><?php echo $hasSearch ? '&q=' . urlencode($searchTerm) : ''; ?><?php echo $barangayFilter ? '&barangay=' . urlencode($barangayFilter) : ''; ?><?php echo $statusFilter ? '&status=' . urlencode($statusFilter) : ''; ?>">
+                            STATUS <span class="sort-indicator"><?php echo ($sortBy === 'expiration_date') ? ($sortDir === 'DESC' ? '▼' : '▲') : ''; ?></span>
+                        </a>
+                    </th>
+                    <th style="width: 20%;">ACTIONS</th>
                 </tr>
             </thead>
             <tbody>
@@ -317,6 +364,9 @@ if ($stmt) {
                 if ($statusFilter !== '') {
                     $filterQueryParams['status'] = $statusFilter;
                 }
+                // Add sort parameters
+                $filterQueryParams['sortBy'] = $sortBy;
+                $filterQueryParams['sortDir'] = $sortDir;
                 $filterQuery = http_build_query($filterQueryParams);
                 $filterSuffix = $filterQuery !== '' ? '&' . $filterQuery : '';
             ?>
@@ -385,6 +435,7 @@ if ($stmt) {
         </script>
     </div>
     <script>
+        // Add Document Button
         const addDocButton = document.getElementById('addDocumentButton');
         if (addDocButton) {
             addDocButton.addEventListener('click', () => {

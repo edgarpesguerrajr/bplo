@@ -2,6 +2,9 @@
 session_start();
 require_once 'config.php'; // Required for database connection
 
+// Set proper character encoding for JSON responses
+header('Content-Type: application/json; charset=utf-8');
+
 // Check if the user is logged in
 if (!isset($_SESSION['role'])) {
     echo json_encode(['error' => 'Unauthorized access.']);

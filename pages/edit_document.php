@@ -337,13 +337,13 @@ if ($document) {
                         <select id="barangay" name="barangay" class="form-control">
                             <option value="">--Select Barangay--</option>
                             <option value="CAYABU" <?php echo ($document && $document['barangay'] === 'CAYABU') ? 'selected' : ''; ?>>CAYABU</option>
-                            <option value="CUYAMBAY" <?php echo ($document && $document['barangay'] === 'CUYAMBAY') ? 'selected' : ''; ?>>CUYAMBAY</option>
+                            <option value="CAYUMBAY" <?php echo ($document && $document['barangay'] === 'CAYUMBAY') ? 'selected' : ''; ?>>CAYUMBAY</option>
                             <option value="DARAITAN" <?php echo ($document && $document['barangay'] === 'DARAITAN') ? 'selected' : ''; ?>>DARAITAN</option>
-                            <option value="KATIPUNAN-BAYANI" <?php echo ($document && $document['barangay'] === 'KATIPUNAN-BAYANI') ? 'selected' : ''; ?>>KATIPUNAN-BAYANI</option>
+                            <option value="KATIPUNAN BAYANI" <?php echo ($document && $document['barangay'] === 'KATIPUNAN BAYANI') ? 'selected' : ''; ?>>KATIPUNAN BAYANI</option>
                             <option value="KAYBUTO" <?php echo ($document && $document['barangay'] === 'KAYBUTO') ? 'selected' : ''; ?>>KAYBUTO</option>
                             <option value="LAIBAN" <?php echo ($document && $document['barangay'] === 'LAIBAN') ? 'selected' : ''; ?>>LAIBAN</option>
                             <option value="MADILAYDILAY" <?php echo ($document && $document['barangay'] === 'MADILAYDILAY') ? 'selected' : ''; ?>>MADILAYDILAY</option>
-                            <option value="MAG-AMPON" <?php echo ($document && $document['barangay'] === 'MAG-AMPON') ? 'selected' : ''; ?>>MAG-AMPON</option>
+                            <option value="MAG AMPON" <?php echo ($document && $document['barangay'] === 'MAG AMPON') ? 'selected' : ''; ?>>MAG AMPON</option>
                             <option value="MAMUYAO" <?php echo ($document && $document['barangay'] === 'MAMUYAO') ? 'selected' : ''; ?>>MAMUYAO</option>
                             <option value="PINAGKAMALIGAN" <?php echo ($document && $document['barangay'] === 'PINAGKAMALIGAN') ? 'selected' : ''; ?>>PINAGKAMALIGAN</option>
                             <option value="PLAZA ALDEA" <?php echo ($document && $document['barangay'] === 'PLAZA ALDEA') ? 'selected' : ''; ?>>PLAZA ALDEA</option>
@@ -351,7 +351,7 @@ if ($document) {
                             <option value="SAN ANDRES" <?php echo ($document && $document['barangay'] === 'SAN ANDRES') ? 'selected' : ''; ?>>SAN ANDRES</option>
                             <option value="SAN ISIDRO" <?php echo ($document && $document['barangay'] === 'SAN ISIDRO') ? 'selected' : ''; ?>>SAN ISIDRO</option>
                             <option value="SANTA INEZ" <?php echo ($document && $document['barangay'] === 'SANTA INEZ') ? 'selected' : ''; ?>>SANTA INEZ</option>
-                            <option value="SANTO NIÑO" <?php echo ($document && $document['barangay'] === 'SANTO NIÑO') ? 'selected' : ''; ?>>SANTO NIÑO</option>
+                            <option value="STO NIÑO" <?php echo ($document && $document['barangay'] === 'STO NIÑO') ? 'selected' : ''; ?>>STO NIÑO</option>
                             <option value="TABING ILOG" <?php echo ($document && $document['barangay'] === 'TABING ILOG') ? 'selected' : ''; ?>>TABING ILOG</option>
                             <option value="TANDANG KUTYO" <?php echo ($document && $document['barangay'] === 'TANDANG KUTYO') ? 'selected' : ''; ?>>TANDANG KUTYO</option>
                             <option value="TINUCAN" <?php echo ($document && $document['barangay'] === 'TINUCAN') ? 'selected' : ''; ?>>TINUCAN</option>
@@ -404,7 +404,7 @@ if ($document) {
                             <div class="form-row-4 office-row" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
                                 <div class="form-group">
                                     <label for="driver_first_name">Driver First Name</label>
-                                    <input type="text" id="driver_first_name" name="driver_first_name[]" class="form-control" value="<?php echo htmlspecialchars($driverRow['driver_first_name'] ?? ''); ?>" <?php echo $index === 0 ? 'required' : ''; ?>>
+                                    <input type="text" id="driver_first_name" name="driver_first_name[]" class="form-control" value="<?php echo htmlspecialchars($driverRow['driver_first_name'] ?? ''); ?>" <?php echo $index === 0 ? : ''; ?>>
                                 </div>
                                 <div class="form-group">
                                     <label for="driver_middle_name">Driver Middle Name</label>
@@ -412,7 +412,7 @@ if ($document) {
                                 </div>
                                 <div class="form-group">
                                     <label for="driver_last_name">Driver Last Name</label>
-                                    <input type="text" id="driver_last_name" name="driver_last_name[]" class="form-control" value="<?php echo htmlspecialchars($driverRow['driver_last_name'] ?? ''); ?>" <?php echo $index === 0 ? 'required' : ''; ?>>
+                                    <input type="text" id="driver_last_name" name="driver_last_name[]" class="form-control" value="<?php echo htmlspecialchars($driverRow['driver_last_name'] ?? ''); ?>" <?php echo $index === 0 ? : ''; ?>>
                                 </div>
                                 <div class="form-group">
                                     <label for="driver_ext_name">Driver Ext Name</label>

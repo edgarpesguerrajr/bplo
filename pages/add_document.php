@@ -234,13 +234,13 @@ if (isset($_GET['success']) && $_GET['success'] === 'added') {
                             <select id="barangay" name="barangay" class="form-control">
                                 <option value="">--Select Barangay--</option>
                                 <option value="CAYABU">CAYABU</option>
-                                <option value="CUYAMBAY">CUYAMBAY</option>
+                                <option value="CAYUMBAY">CAYUMBAY</option>
                                 <option value="DARAITAN">DARAITAN</option>
-                                <option value="KATIPUNAN-BAYANI">KATIPUNAN-BAYANI</option>
+                                <option value="KATIPUNAN BAYANI">KATIPUNAN BAYANI</option>
                                 <option value="KAYBUTO">KAYBUTO</option>
                                 <option value="LAIBAN">LAIBAN</option>
                                 <option value="MADILAYDILAY">MADILAYDILAY</option>
-                                <option value="MAG-AMPON">MAG-AMPON</option>
+                                <option value="MAG AMPON">MAG AMPON</option>
                                 <option value="MAMUYAO">MAMUYAO</option>
                                 <option value="PINAGKAMALIGAN">PINAGKAMALIGAN</option>
                                 <option value="PLAZA ALDEA">PLAZA ALDEA</option>
@@ -248,7 +248,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'added') {
                                 <option value="SAN ANDRES">SAN ANDRES</option>
                                 <option value="SAN ISIDRO">SAN ISIDRO</option>
                                 <option value="SANTA INEZ">SANTA INEZ</option>
-                                <option value="SANTO NIÑO">SANTO NIÑO</option>
+                                <option value="STO NIÑO">STO NIÑO</option>
                                 <option value="TABING ILOG">TABING ILOG</option>
                                 <option value="TANDANG KUTYO">TANDANG KUTYO</option>
                                 <option value="TINUCAN">TINUCAN</option>
@@ -302,7 +302,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'added') {
                             <div class="form-row-4 office-row" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
                                 <div class="form-group">
                                     <label for="driver_first_name">Driver First Name</label>
-                                    <input type="text" id="driver_first_name" name="driver_first_name[]" class="form-control" placeholder="Enter Driver First Name" required>
+                                    <input type="text" id="driver_first_name" name="driver_first_name[]" class="form-control" placeholder="Enter Driver First Name">
                                 </div>
                                 <div class="form-group">
                                     <label for="driver_middle_name">Driver Middle Name</label>
@@ -310,7 +310,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'added') {
                                 </div>
                                 <div class="form-group">
                                     <label for="driver_last_name">Driver Last Name</label>
-                                    <input type="text" id="driver_last_name" name="driver_last_name[]" class="form-control" placeholder="Enter Driver Last Name" required>
+                                    <input type="text" id="driver_last_name" name="driver_last_name[]" class="form-control" placeholder="Enter Driver Last Name">
                                 </div>
                                 <div class="form-group">
                                     <label for="driver_ext_name">Driver Ext Name</label>
@@ -334,15 +334,15 @@ if (isset($_GET['success']) && $_GET['success'] === 'added') {
                     <div class="form-row-3">
                         <div class="form-group">
                             <label for="registration_date">Registration Date</label>
-                            <input type="date" id="registration_date" name="registration_date" class="form-control" placeholder="Enter Registration Date" required>
+                            <input type="date" id="registration_date" name="registration_date" class="form-control" placeholder="Enter Registration Date">
                         </div>
                         <div class="form-group">
                             <label for="expiration_date">Expiration Date</label>
-                            <input type="date" id="expiration_date" name="expiration_date" class="form-control" placeholder="Enter Expiration Date" required>
+                            <input type="date" id="expiration_date" name="expiration_date" class="form-control" placeholder="Enter Expiration Date">
                         </div>
                         <div class="form-group">
                             <label for="registration_no">Registration No.</label>
-                            <input type="text" id="registration_no" name="registration_no" class="form-control" placeholder="Enter Registration No." required>
+                            <input type="text" id="registration_no" name="registration_no" class="form-control" placeholder="Enter Registration No.">
                         </div>
                     </div>
 
@@ -386,11 +386,11 @@ if (isset($_GET['success']) && $_GET['success'] === 'added') {
                     <div class="form-row-2">
                         <div class="form-group">
                             <label for="or_no">OR No.</label>
-                            <input type="text" id="or_no" name="or_no" class="form-control" placeholder="Enter OR No." required>
+                            <input type="text" id="or_no" name="or_no" class="form-control" placeholder="Enter OR No.">
                         </div>
                         <div class="form-group">
                             <label for="or_date">OR Date</label>
-                            <input type="date" id="or_date" name="or_date" class="form-control" required>
+                            <input type="date" id="or_date" name="or_date" class="form-control" >
                         </div>
                     </div>
 
@@ -398,11 +398,11 @@ if (isset($_GET['success']) && $_GET['success'] === 'added') {
                     <div class="form-row-2">
                         <div class="form-group">
                             <label for="ctc_no">CTC No.</label>
-                            <input type="text" id="ctc_no" name="ctc_no" class="form-control" placeholder="Enter CTC No." required>
+                            <input type="text" id="ctc_no" name="ctc_no" class="form-control" placeholder="Enter CTC No." >
                         </div>
                         <div class="form-group">
                             <label for="ctc_date">CTC Date</label>
-                            <input type="date" id="ctc_date" name="ctc_date" class="form-control" required>
+                            <input type="date" id="ctc_date" name="ctc_date" class="form-control" >
                         </div>
                     </div>
 
@@ -410,11 +410,11 @@ if (isset($_GET['success']) && $_GET['success'] === 'added') {
                     <div class="form-row-2">
                         <div class="form-group">
                             <label for="sticker_no">Sticker No.</label>
-                            <input type="text" id="sticker_no" name="sticker_no" class="form-control" placeholder="Enter Sticker No." required>
+                            <input type="text" id="sticker_no" name="sticker_no" class="form-control" placeholder="Enter Sticker No." >
                         </div>
                         <div class="form-group">
                             <label for="toda_no">TODA No.</label>
-                            <input type="text" id="toda_no" name="toda_no" class="form-control" placeholder="Enter TODA No." required>
+                            <input type="text" id="toda_no" name="toda_no" class="form-control" placeholder="Enter TODA No." >
                         </div>
                     </div>
 
