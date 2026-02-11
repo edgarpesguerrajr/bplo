@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 09, 2026 at 12:51 AM
+-- Generation Time: Feb 11, 2026 at 01:24 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -45,6 +45,7 @@ CREATE TABLE `documents` (
   `driver_last_name` varchar(100) DEFAULT NULL,
   `driver_ext_name` varchar(10) DEFAULT NULL,
   `registration_date` date DEFAULT NULL,
+  `registration_no` varchar(50) DEFAULT NULL,
   `expiration_date` date DEFAULT NULL,
   `franchisee_fee` decimal(10,2) DEFAULT 0.00,
   `sticker_fee` decimal(10,2) DEFAULT 0.00,
@@ -57,6 +58,8 @@ CREATE TABLE `documents` (
   `or_date` date DEFAULT NULL,
   `ctc_no` varchar(100) DEFAULT NULL,
   `ctc_date` date DEFAULT NULL,
+  `sticker_no` varchar(50) DEFAULT NULL,
+  `toda_no` varchar(50) DEFAULT NULL,
   `remarks` text DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -142,7 +145,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `verified`) VALUES
-(1, 'Jed', 'admin@admin.com', '$2y$10$pIwGr3KSFk6.YE6ZwEQIn.9OQKqOIQGkmfK9eV.PJj4TSBH9DPc4G', 'admin', 0);
+(1, 'Super Admin', 'admin@admin.com', '$2y$10$pIwGr3KSFk6.YE6ZwEQIn.9OQKqOIQGkmfK9eV.PJj4TSBH9DPc4G', 'admin', 0);
 
 --
 -- Indexes for dumped tables
@@ -203,7 +206,7 @@ ALTER TABLE `document_history`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables

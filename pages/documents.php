@@ -88,7 +88,7 @@ $offset = (int)$offset;
 $listSql = "SELECT id, franchise_no, franchisee_first_name, franchisee_last_name, barangay, expiration_date
             FROM documents
             {$whereSql}
-            ORDER BY created_at DESC
+            ORDER BY franchise_no DESC
             LIMIT ? OFFSET ?";
 $stmt = $conn->prepare($listSql);
 if ($stmt) {
@@ -174,6 +174,31 @@ if ($stmt) {
             border: 1px solid #ced4da;
         }
 
+        .ellipsis {
+            display: inline-block;
+            padding: 8px 6px;
+            color: var(--color-text-primary);
+            font-weight: 500;
+        }
+
+        .pagination-controls .pagination-btn {
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .pagination-controls .pagination-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .pagination-controls .pagination-btn.active {
+            font-weight: 600;
+            background-color: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+            pointer-events: none;
+        }
+
     </style>
 </head>
 <body>
@@ -201,7 +226,7 @@ if ($stmt) {
             <select name="barangay" class="search-bar" style="max-width: 180px;">
                 <option value="">All Barangays</option>
                 <option value="CAYABU" <?php echo $barangayFilter === 'CAYABU' ? 'selected' : ''; ?>>CAYABU</option>
-                <option value="CUYAMBAY" <?php echo $barangayFilter === 'CUYAMBAY' ? 'selected' : ''; ?>>CUYAMBAY</option>
+                <option value="CAYUMBAY" <?php echo $barangayFilter === 'CAYUMBAY' ? 'selected' : ''; ?>>CAYUMBAY</option>
                 <option value="DARAITAN" <?php echo $barangayFilter === 'DARAITAN' ? 'selected' : ''; ?>>DARAITAN</option>
                 <option value="KATIPUNAN-BAYANI" <?php echo $barangayFilter === 'KATIPUNAN-BAYANI' ? 'selected' : ''; ?>>KATIPUNAN-BAYANI</option>
                 <option value="KAYBUTO" <?php echo $barangayFilter === 'KAYBUTO' ? 'selected' : ''; ?>>KAYBUTO</option>
@@ -296,28 +321,68 @@ if ($stmt) {
                 $filterSuffix = $filterQuery !== '' ? '&' . $filterQuery : '';
             ?>
             <span>Showing <?php echo $startItem; ?>-<?php echo $endItem; ?> of <?php echo $totalDocuments; ?></span>
-            <div class="pagination-controls">
-                <?php if ($page > 1): ?>
-                    <a class="pagination-btn" href="template.php?page=documents&p=<?php echo $page - 1; ?><?php echo $filterSuffix; ?>">Previous</a>
-                <?php else: ?>
-                    <button class="pagination-btn" disabled>Previous</button>
-                <?php endif; ?>
-
-                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                    <?php if ($i === $page): ?>
-                        <button class="pagination-btn active" disabled><?php echo $i; ?></button>
-                    <?php else: ?>
-                        <a class="pagination-btn" href="template.php?page=documents&p=<?php echo $i; ?><?php echo $filterSuffix; ?>"><?php echo $i; ?></a>
-                    <?php endif; ?>
-                <?php endfor; ?>
-
-                <?php if ($page < $totalPages): ?>
-                    <a class="pagination-btn" href="template.php?page=documents&p=<?php echo $page + 1; ?><?php echo $filterSuffix; ?>">Next</a>
-                <?php else: ?>
-                    <button class="pagination-btn" disabled>Next</button>
-                <?php endif; ?>
+            <div id="pagination-controls" class="pagination-controls">
+                <!-- Pagination will be rendered by JavaScript -->
             </div>
         </div>
+
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = <?php echo (int)$page; ?>;
+            const totalPages = <?php echo (int)$totalPages; ?>;
+            const filterSuffix = '<?php echo addslashes($filterSuffix); ?>';
+
+            function renderPagination() {
+                let paginationHtml = '';
+
+                // Previous button
+                const prevDisabled = currentPage === 1 ? 'disabled' : '';
+                const prevHref = currentPage > 1 ? `href="template.php?page=documents&p=${currentPage - 1}${filterSuffix}"` : '';
+                const prevTag = currentPage > 1 ? 'a' : 'button';
+                paginationHtml += `<${prevTag} class="pagination-btn prev" ${prevHref} ${prevDisabled}>Previous</${prevTag}>`;
+
+                // First two pages
+                paginationHtml += `<a class="pagination-btn ${currentPage === 1 ? 'active' : ''}" href="template.php?page=documents&p=1${filterSuffix}">1</a>`;
+                if (totalPages > 1) {
+                    paginationHtml += `<a class="pagination-btn ${currentPage === 2 ? 'active' : ''}" href="template.php?page=documents&p=2${filterSuffix}">2</a>`;
+                }
+
+                // Ellipsis if needed
+                if (currentPage > 3 && totalPages > 5) {
+                    paginationHtml += `<span class="ellipsis">...</span>`;
+                }
+
+                // Current page (if not in first two or last two)
+                if (currentPage > 2 && currentPage < totalPages - 1) {
+                    paginationHtml += `<a class="pagination-btn active" href="template.php?page=documents&p=${currentPage}${filterSuffix}">${currentPage}</a>`;
+                }
+
+                // Ellipsis before last two
+                if (currentPage < totalPages - 2 && totalPages > 5) {
+                    paginationHtml += `<span class="ellipsis">...</span>`;
+                }
+
+                // Last two pages
+                if (totalPages > 1 && totalPages > 2) {
+                    paginationHtml += `<a class="pagination-btn ${currentPage === totalPages - 1 ? 'active' : ''}" href="template.php?page=documents&p=${totalPages - 1}${filterSuffix}">${totalPages - 1}</a>`;
+                }
+                if (totalPages > 1) {
+                    paginationHtml += `<a class="pagination-btn ${currentPage === totalPages ? 'active' : ''}" href="template.php?page=documents&p=${totalPages}${filterSuffix}">${totalPages}</a>`;
+                }
+
+                // Next button
+                const nextDisabled = currentPage === totalPages ? 'disabled' : '';
+                const nextHref = currentPage < totalPages ? `href="template.php?page=documents&p=${currentPage + 1}${filterSuffix}"` : '';
+                const nextTag = currentPage < totalPages ? 'a' : 'button';
+                paginationHtml += `<${nextTag} class="pagination-btn next" ${nextHref} ${nextDisabled}>Next</${nextTag}>`;
+
+                document.getElementById('pagination-controls').innerHTML = paginationHtml;
+            }
+
+            // Initial render
+            renderPagination();
+        });
+        </script>
     </div>
     <script>
         const addDocButton = document.getElementById('addDocumentButton');

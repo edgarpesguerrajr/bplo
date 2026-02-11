@@ -5,9 +5,9 @@ $user_name = isset($_SESSION['name']) ? $_SESSION['name'] : 'Guest';
 
 $totalDocuments = 0;
 $barangays = [
-    'CAYABU', 'CUYAMBAY', 'DARAITAN', 'KATIPUNAN-BAYANI', 'KAYBUTO', 'LAIBAN',
-    'MADILAYDILAY', 'MAG-AMPON', 'MAMUYAO', 'PINAGKAMALIGAN', 'PLAZA ALDEA',
-    'SAMPALOC', 'SAN ANDRES', 'SAN ISIDRO', 'SANTA INEZ', 'SANTO NIÑO',
+    'CAYABU', 'CAYUMBAY', 'DARAITAN', 'KATIPUNAN BAYANI', 'KAYBUTO', 'LAIBAN',
+    'MADILAYDILAY', 'MAG AMPON', 'MAMUYAO', 'PINAGKAMALIGAN', 'PLAZA ALDEA',
+    'SAMPALOC', 'SAN ANDRES', 'SAN ISIDRO', 'SANTA INEZ', 'STO NIÑO',
     'TABING ILOG', 'TANDANG KUTYO', 'TINUCAN', 'WAWA'
 ];
 $barangayCounts = array_fill_keys($barangays, 0);
