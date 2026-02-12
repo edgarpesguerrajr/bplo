@@ -9,6 +9,29 @@ if ($id <= 0) {
     $errorMessage = 'Invalid document ID.';
 }
 
+// Capture filter parameters for redirect
+$searchTerm = trim($_GET['q'] ?? '');
+$barangayFilter = trim($_GET['barangay'] ?? '');
+$statusFilter = trim($_GET['status'] ?? '');
+$sortBy = $_GET['sortBy'] ?? 'franchise_no';
+$sortDir = $_GET['sortDir'] ?? 'DESC';
+
+// Build filter suffix for redirect
+$filterQueryParams = [];
+if ($searchTerm !== '') {
+    $filterQueryParams['q'] = $searchTerm;
+}
+if ($barangayFilter !== '') {
+    $filterQueryParams['barangay'] = $barangayFilter;
+}
+if ($statusFilter !== '') {
+    $filterQueryParams['status'] = $statusFilter;
+}
+$filterQueryParams['sortBy'] = $sortBy;
+$filterQueryParams['sortDir'] = $sortDir;
+$filterQuery = http_build_query($filterQueryParams);
+$filterSuffix = $filterQuery !== '' ? '&' . $filterQuery : '';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $id > 0) {
     $franchise_no = trim($_POST['franchisee_no'] ?? '');
     $franchisee_first_name = trim($_POST['franchisee_first_name'] ?? '');
@@ -195,10 +218,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $id > 0) {
                 }
 
                 if (!headers_sent()) {
-                    header('Location: template.php?page=documents&success=updated');
+                    header('Location: template.php?page=documents&success=updated' . $filterSuffix);
                     exit;
                 }
-                echo "<script>window.location.replace('template.php?page=documents&success=updated');</script>";
+                echo "<script>window.location.replace('template.php?page=documents&success=updated" . addslashes($filterSuffix) . "');</script>";
                 exit;
             } else {
                 $errorMessage = "Error: " . $stmt->error;
@@ -522,7 +545,7 @@ if ($document) {
 
                 <div class="form-row-2">
                     <button type="submit" class="btn submit-btn">Update</button>
-                    <a href="template.php?page=documents" class="btn cancel-btn" style="text-align: center;">Cancel</a>
+                    <a href="template.php?page=documents<?php echo $filterSuffix; ?>" class="btn cancel-btn" style="text-align: center;">Cancel</a>
                 </div>
             </form>
         </div>

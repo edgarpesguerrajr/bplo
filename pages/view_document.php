@@ -10,6 +10,29 @@ if ($id <= 0) {
     $errorMessage = 'Invalid document ID.';
 }
 
+// Capture filter parameters for back button
+$searchTerm = trim($_GET['q'] ?? '');
+$barangayFilter = trim($_GET['barangay'] ?? '');
+$statusFilter = trim($_GET['status'] ?? '');
+$sortBy = $_GET['sortBy'] ?? 'franchise_no';
+$sortDir = $_GET['sortDir'] ?? 'DESC';
+
+// Build filter suffix for back button
+$filterQueryParams = [];
+if ($searchTerm !== '') {
+    $filterQueryParams['q'] = $searchTerm;
+}
+if ($barangayFilter !== '') {
+    $filterQueryParams['barangay'] = $barangayFilter;
+}
+if ($statusFilter !== '') {
+    $filterQueryParams['status'] = $statusFilter;
+}
+$filterQueryParams['sortBy'] = $sortBy;
+$filterQueryParams['sortDir'] = $sortDir;
+$filterQuery = http_build_query($filterQueryParams);
+$filterSuffix = $filterQuery !== '' ? '&' . $filterQuery : '';
+
 $document = null;
 if ($id > 0) {
     $stmt = $conn->prepare("SELECT * FROM documents WHERE id = ?");
@@ -337,10 +360,11 @@ $statusClass = $isExpired ? 'danger' : 'success';
 
                     <!------- SAVE CANCEL ------->
                     <div class="form-row-2">
-                        <a href="pages/generate_pdf.php?id=<?php echo $id; ?>" class="btn" style="text-align: center; background-color: var(--color-success-bg); color: var(--color-success-text); text-decoration: none;">
-                            <span class="material-symbols-outlined">Download</span>
+                        <a href="pages/generate_pdf.php?id=<?php echo $id; ?>" class="btn" target="_blank" style="text-align: center; background-color: var(--color-success-bg); color: var(--color-success-text); text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            <span class="material-symbols-rounded">picture_as_pdf</span>
+                            Generate PDF
                         </a>
-                        <a href="template.php?page=documents" class="btn cancel-btn" style="text-align: center;">Back</a>
+                        <a href="template.php?page=documents<?php echo $filterSuffix; ?>" class="btn cancel-btn" style="text-align: center;">Back</a>
                     </div>
 
 

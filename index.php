@@ -27,6 +27,21 @@ function isActiveForm($formName, $activeForm) {
     <link rel="stylesheet" href="static\index.css">
     <link rel="stylesheet" href="static\global.css">
     <title>BPLO Monitoring System</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* background: linear-gradient(to right, #e2e2e2, #c9d6ff); */
+            color: var(--color-text-primary);
+            --color: #E1E1E1;
+            background-color: #F3F3F3;
+            background-image: linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%,transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%,transparent),
+            linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%,transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%,transparent);
+            background-size: 55px 55px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">

@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://unpkg.com/gutenberg-css@0.6">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Calibri, "Segoe UI", Arial, sans-serif;
+        }
+
+        body{
+            margin: 0.5in 0.5in 0 0.5in;
+          }
+          
+          header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+          }
+        .header-title {
+            text-align: center;
+          }
+          .logo img {
+            width: 100px;
+            height: auto;
+            margin-right: 20px;
+          }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border:none;
+        }
+        th, td {
+            border-bottom: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+        </style>
+</head>
+<body>
+    <!-------------------------- FORM 1 -------------------------->
+    <!-------------------------- HEADER -------------------------->
+    <header>
+        <div class="logo" style="position: absolute; left: 170px;">
+            <img src="/static/tanay_logo.png" alt="tanay_logo">
+        </div>
+        <div class="header-title" style="font-family: 'Century Gothic', sans-serif; font-size: 12pt;">
+            <p style="font-weight: bold;">Republic of the Philippines</p>
+            <p style="font-size: 11pt;">Province of Rizal</p>
+            <p style="font-weight: bold;">Municipality of Tanay</p>
+        </div>
+    </header>
+    <p style="font-family: 'Century Gothic', sans-serif; font-size: 18pt; font-weight: bold; text-align: center; margin-bottom: 10px;">OFFICE OF THE MAYOR</p>
+
+    <!-------------------------- REGISTRATION -------------------------->
+    <section class="registration" style="position: relative;">
+        <div style="border: 2px solid #000; position: absolute; top: -110px; right: -25px; padding: 8px; width: 200px;">
+            <div style="font-size: 9pt; margin-bottom: 6px;">
+                <span style="display: inline-block; width: 100px;">Registration No.:</span>
+                <span style="display: inline-block; width: 80px; border-bottom: 1px solid #000;">{{ registration_no }}</span>
+            </div>
+            <div style="font-size: 9pt; margin-bottom: 6px;">
+                <span style="display: inline-block; width: 100px;">Date of Reg:</span>
+                <span style="display: inline-block; width: 80px; border-bottom: 1px solid #000;">{{ registration_date }}</span>
+            </div>
+            <div style="font-size: 9pt; margin-bottom: 6px;">
+                <span style="display: inline-block; width: 100px;">Expiry Date:</span>
+                <span style="display: inline-block; width: 80px; border-bottom: 1px solid #000;">{{ expiration_date }}</span>
+            </div>
+            <div style="font-size: 9pt; margin-bottom: 6px;">
+                <span style="display: inline-block; width: 100px;">Amount Paid:</span>
+                <span style="display: inline-block; width: 80px; border-bottom: 1px solid #000;">{{ total_amount }}</span>
+            </div>
+            <div style="font-size: 9pt;">
+                <span style="display: inline-block; width: 100px;">OR No./Date Paid:</span>
+                <span style="display: inline-block; width: 80px; border-bottom: 1px solid #000;">{{ or_no_date }}</span>
+            </div>
+        </div>
+    </section>
+
+    <!-------------------------- TITLE -------------------------->
+    <section class="title">
+        <p style="font-family: 'Times New Roman', Times, serif, sans-serif; font-weight: bold; margin: 30px 0;">Form 1</p>
+        <p style="font-weight: bold; text-align: center; font-size: 13pt;">MUNICIPAL TRICYCLE OPERATOR’S PERMIT REGULATORY BOARD</p>
+        <p style="font-weight: bold; text-align: center; font-size: 12pt; margin-top:10px">PROVISIONAL AUTHORITY FOR<br>MOTORIZED TRICYCLE OPERATOR’S PERMIT (MTOP)</p>
+        <p style="text-align: center;">== == == == == == == == == == == == == == == == == == == == ==</p>
+    </section>
+
+    <!-------------------------- APPLICANT -------------------------->
+    <section class="applicant" style="font-size:10pt; font-weight:bold; margin:10px 0;">
+    <p style="position:relative; margin:5px 0;">
+        Name of Applicant/Operator:
+        <span style="display:inline-block; width:300px; border-bottom:1px solid #000;">&nbsp;</span>
+        <span style="position:absolute; left:210px; top: -3px; font-weight:normal; font-weight: bold;">{{ operator_name }}</span>
+    </p>
+
+    <p style="position:relative; margin:5px 0;">
+        Residence Address:
+        <span style="display:inline-block; width:500px; border-bottom:1px solid #000;">&nbsp;</span>
+        <span style="position:absolute; left:140px; top: -3px; font-weight:normal;">
+        {{ address }}
+        </span>
+    </p>
+
+    <p style="font-weight:normal; margin-top:5px; font-size: 10pt; text-align: justify;">
+        Herein applicant/operator is hereby granted provisional authority to operate a motorized tricycle-for-hire within the Municipality of Tanay, Rizal, using one (1) unit tricycle described as follows:
+    </p>
+    </section>
+
+    <!-------------------------- UNIT -------------------------->
+    <section class="unit" style="margin-bottom: 10px;">
+        <table>
+        <tr style="font-size: 10pt;">
+            <th style="width: 10%;">MAKE</th>
+            <th style="width: 10%;">MODEL</th>
+            <th style="width: 20%;">MOTOR NO.</th>
+            <th style="width: 20%;">CHASSIS NO.</th>
+            <th style="width: 15%;">LTO PLATE NO.</th>
+            <th style="width: 25%;">MTOP PLATE NO. TODA NO.</th>
+        </tr>
+        <tr style="font-size: 10pt; font-weight: bold;">
+            <td>{{ make }}</td><td>{{ year_model }}</td><td>{{ motor_no }}</td><td>{{ chassis_no }}</td>
+            <td>{{ plate_no }}</td><td>{{ mtop_plate }}</td>
+        </tr>
+        </table>
+    </section>
+
+    <!-------------------------- VALIDITY -------------------------->
+    <section style="margin-bottom: 10px; font-size: 10pt;">
+        <p style="font-family: 'Times New Roman', Times, serif, sans-serif; font-weight: bold; text-align: justify;">Validity: This Motorized Tricycle Operator’s Permit (MTOP) shall be valid for a period of two (2) years.</p>
+        <p style="text-align: justify;">MTOP not renewed after two (2) years from expiry date shall be deemed cancelled/revoked (per Section 94 and 101 of Municipal Ordinance No. 22, S-2019)</p>
+    </section>
+
+    <!-------------------------- T&C -------------------------->
+    <section style="margin-bottom: 10px; font-size: 10pt;">
+        <p style="font-weight: bold; text-align: justify;">Subject to the following terms and conditions per Sections 96 (c) and 97 of Municipal Ordinance No. 22, S-2019: </p>
+        <p style="margin-bottom: 10px;">The MTOP grantee shall </p>
+        <ol style="list-style: decimal; list-style-position: outside; padding-left: 25px; margin-bottom: 10px; text-align: justify;">
+            <li>Provide the unit with trash can;</li>
+            <li>Carry a common carrier’s insurance sufficient to answer for any liability it may incur to passengers and third parties in case of accidents; employ drivers duly licensed by the Land Transportation Office (LTO), who at all times wear the prescribed ID for proper identification;</li>
+            <li>Report in writing to the Board, if they intend to stop service completely, or suspend service for more than one (1) month;</li>
+            <li>Comply with the Number Coding Scheme and prescribed mudguard size (1 foot x 2 feet), and place of display;</li>
+            <li>Collect only the fare rate allowed by applicable local ordinances, rules and regulations;</li>
+            <li>Register the tricycle unit with the LTO Field Office with jurisdiction over the Municipality of Tanay;</li>
+            <li>Comply with existing laws, ordinances, policies, rules and regulations for tricycle-for-hire services as well as with the terms and conditions stated herein. Non-compliance therewith shall be sufficient cause for the suspension or cancellation/revocation of this Provisional Authority.</li>
+        </ol>
+        <p style="font-weight: bold; text-align: justify;">Prohibited Acts per Section 99 of Municipal Ordinance No. 22, S-2019. The following acts are strictly prohibited:</p>
+        <ol style="list-style: decimal; list-style-position: outside; padding-left: 25px; text-align: justify;">
+            <li>No tricycle operator and/or driver shall operate within the Municipality without the required Motorized Tricycle Operator’s Permit (MTOP).</li>
+            <li>No tricycle operator/driver shall carry more than three (3) passengers, likewise he shall be held liable for overloading.</li>
+            <li>No tricycle operator/driver shall be allowed to operate his unit if he is under the influence of intoxicating beverages or prohibited drugs.</li>
+            <li>No tricycles shall operate on national highways utilized by 4 wheel vehicles greater than 4 tons and where normal speed exceeds 40 KPH.</li>                   
+        </ol>
+    </section>
+
+    <!-------------------------- SIGNATURE -------------------------->
+    <footer style="margin-top:30px;">
+        <table style="width: 100%; border: none;">
+            <tr>
+                <!-- Applicant signature -->
+                <td style="width: 50%; border: none; padding: 0; vertical-align: top;">
+                    <p style="font-weight:bold; margin-bottom:40px; font-size: 10pt;">
+                    CONFORME:
+                    </p>
+                    <p style="margin: 0; text-align: center;">
+                        <span style="font-size: 10pt; display: inline-block; min-width:250px; border-bottom:1px solid #000; text-align:center; font-weight:bold; padding-bottom: 2px;">
+                        {{ operator_name }}
+                        </span>
+                    </p>
+                    <p style="font-weight:normal; font-style:italic; margin-top:2px; text-align: center; font-size: 10pt;">(Signature of the Applicant over Printed Name)</p>
+                </td>
+                
+                <!-- Mayor approval signature -->
+                <td style="width: 50%; border: none; padding: 0; padding-left: 60px; vertical-align: top;">
+                    <p style="font-weight:bold; margin-bottom:40px; font-size: 10pt;">
+                    APPROVED:
+                    </p>
+                    <p style="margin: 0;">
+                        <span style="font-weight:bold; font-size: 10pt;">
+                        REX MANUEL C. TANJUATCO
+                        </span>
+                    </p>
+                    <p style="font-weight:normal; margin-top:2px; font-size: 10pt;">Municipal Mayor</p>
+                </td>
+            </tr>
+        </table>
+    </footer>
+
+    <!-------------------------- FORM 2 -------------------------->
+    <!-------------------------- HEADER -------------------------->
+    <header style="page-break-before: always;">
+        <div class="logo" style="position: absolute; left: 170px;">
+            <img src="/static/tanay_logo.png" alt="tanay_logo">
+        </div>
+        <div class="header-title" style="font-family: 'Century Gothic', sans-serif; font-size: 12pt;">
+            <p style="font-weight: bold;">Republic of the Philippines</p>
+            <p style="font-size: 11pt;">Province of Rizal</p>
+            <p style="font-weight: bold;">Municipality of Tanay</p>
+        </div>
+    </header>
+    <p style="font-family: 'Century Gothic', sans-serif; font-size: 18pt; font-weight: bold; text-align: center; margin-bottom: 10px;">OFFICE OF THE MAYOR</p>
+
+    <!-------------------------- REGISTRATION -------------------------->
+    <section class="registration" style="position: relative;">
+        <div style="border: 2px solid #000; position: absolute; top: -110px; right: 0; padding: 8px; width: 170px;">
+            <div style="font-size: 9pt; font-weight: bold; margin-bottom: 8px;">TYPE OF APPLICATION:</div>
+            <div style="font-size: 9pt; margin-bottom: 6px;">
+                <span style="display: inline-block; width: 70px;">NEW</span>
+                <span style="display: inline-block; width: 10px; text-align: center;">:</span>
+                <span style="display: inline-block; ">{{ application_type_new }}</span>
+            </div>
+            <div style="font-size: 9pt; margin-bottom: 6px;">
+                <span style="display: inline-block; width: 70px;">RENEWAL</span>
+                <span style="display: inline-block; width: 10px; text-align: center;">:</span>
+                <span style="display: inline-block; ">{{ application_type_renewal }}</span>
+            </div>
+            <div style="font-size: 9pt;">
+                <span style="display: inline-block;"><strong>Registration No: </strong>{{ registration_no }}</span>
+        </div>
+    </section>
+
+    <!-------------------------- TITLE -------------------------->
+    <section class="title">
+        <p style="font-family: 'Times New Roman', Times, serif, sans-serif; font-weight: bold; margin: 30px 0;">Form 2</p>
+        <p style="font-weight: bold; text-align: center; font-size: 12pt; margin-bottom: 10px;">MUNICIPAL TRICYCLE OPERATOR’S PERMIT REGULATORY BOARD</p>
+        <p style="font-weight: bold; text-align: center; font-size: 11pt;">APPLICATION FORM FOR PROVISIONAL AUTHORITY<br>FOR MOTORIZED TRICYCLE OPERATOR’S PERMIT (MTOP)</p>
+        <p style="text-align: center;">== == == == == == == == == == == == == == == == == == == == ==</p>
+    </section>
+
+    <!-------------------------- APPLICANT -------------------------->
+    <section class="applicant" style="font-size:10pt; font-weight:bold; margin:10px 0;">
+    <p style="position:relative; margin:5px 0;">
+        Name of Applicant:
+        <span style="display:inline-block; width:300px; border-bottom:1px solid #000;">&nbsp;</span>
+        <span style="position:absolute; left:140px; top: -3px; font-weight:normal; font-weight: bold;">{{ operator_name }}</span>
+    </p>
+
+    <p style="position:relative; margin:5px 0;">
+        Residence Address:
+        <span style="display:inline-block; width:500px; border-bottom:1px solid #000;">&nbsp;</span>
+        <span style="position:absolute; left:140px; top: -4px; font-weight:normal;">
+        {{ address }}
+        </span>
+    </p>
+
+    <p style="font-weight:normal; margin-top:5px; font-size: 10pt;"><strong>Number of unit/s applied for:</strong> One (1) unit ONLY</p>
+    </section>
+    <!-------------------------- UNIT -------------------------->
+    <section class="unit" style="margin-bottom: 10px; font-size: 10pt;">
+        <table>
+        <tr style="font-size: 10pt;">
+            <th style="width: 10%;">MAKE</th>
+            <th style="width: 10%;">MODEL</th>
+            <th style="width: 20%;">MOTOR NO.</th>
+            <th style="width: 20%;">CHASSIS NO.</th>
+            <th style="width: 15%;">LTO PLATE NO.</th>
+            <th style="width: 25%;">MTOP PLATE NO. TODA NO.</th>
+        </tr>
+        <tr style="font-size: 10pt; font-weight: bold;">
+            <td>{{ make }}</td><td>{{ year_model }}</td><td>{{ motor_no }}</td><td>{{ chassis_no }}</td>
+            <td>{{ plate_no }}</td><td>{{ mtop_plate }}</td>
+        </tr>
+        </table>
+    </section>
+
+
+    <!-------------------------- DETAILS -------------------------->
+    <section class="applicant" style="font-size:10pt; font-weight:bold; margin:10px 0;">
+        <table style="width: 100%; border: none;">
+            <tr>
+                <td style="width: 50%; border: none; padding: 0; vertical-align: top;">
+                    <p style="position:relative; margin:5px 0;">
+                        Date of Registration:
+                        <span style="position:absolute; left:150px; display:inline-block; width:150px; border-bottom:1px solid #000;">&nbsp;</span>
+                        <span style="position:absolute; left:150px; top:-2px;">{{ registration_date }}</span>
+                    </p>
+                    <p style="position:relative; margin:5px 0;">
+                        Expiry Date/Validity:
+                        <span style="position:absolute; left:150px; display:inline-block; width:150px; border-bottom:1px solid #000;">&nbsp;</span>
+                        <span style="position:absolute; left:150px; top:-2px;">{{ expiration_date }}</span>
+                    </p>
+                    <p style="position:relative; margin:5px 0;">
+                        Amount Paid:
+                        <span style="position:absolute; left:150px; display:inline-block; width:150px; border-bottom:1px solid #000;">&nbsp;</span>
+                        <span style="position:absolute; left:150px; top:-2px;">{{ total_amount }}</span>
+                    </p>
+                    <p style="position:relative; margin:5px 0;">
+                        OR No./Date Paid:
+                        <span style="position:absolute; left:150px; display:inline-block; width:150px; border-bottom:1px solid #000;">&nbsp;</span>
+                        <span style="position:absolute; left:150px; top:-2px;">{{ or_no_date }}</span>
+                    </p>
+                </td>
+                <td style="width: 50%; border: none; padding: 0; vertical-align: top;">
+                    <p style="position:relative; margin:5px 0;">
+                        CTC NO.:
+                        <span style="position:absolute; left:120px; display:inline-block; width:150px; border-bottom:1px solid #000;">&nbsp;</span>
+                        <span style="position:absolute; left:120px; top:-2px;">{{ ctc_no }}</span>
+                    </p>
+                    <p style="position:relative; margin:5px 0;">
+                        DATE ISSUED:
+                        <span style="position:absolute; left:120px; display:inline-block; width:150px; border-bottom:1px solid #000;">&nbsp;</span>
+                        <span style="position:absolute; left:120px; top:-2px;">{{ ctc_date }}</span>
+                    </p>
+                    <p style="position:relative; margin:5px 0;">
+                        PLACE ISSUED:
+                        <span style="position:absolute; left:120px; display:inline-block; width:150px; border-bottom:1px solid #000;">&nbsp;</span>
+                        <span style="position:absolute; left:120px; top:-2px;">Tanay, Rizal</span>
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </section>
+    <!-------------------------- T&C -------------------------->
+    <section style="margin-bottom: 10px; font-size: 10pt;">
+        <p style="margin-bottom: 10px; text-align: justify;">In compliance with Section 93 of Municipal Ordinance No. 22, S-2019 of the Municipality of Tanay, Rizal, I hereby attached the following documents:</p>
+        <ol style="list-style: decimal; list-style-position: outside; padding-left: 25px; margin-bottom: 10px;">
+            <li>Barangay Certification indicating the actual residency of the applicant and provision of a garage;</li>
+            <li>Current Year Community Tax Certificate;</li>
+            <li>LTO issued Official Receipt and Certificate of Registration;</li>
+            <li>TODA Certification;</li>
+            <li>Valid Identification Card of applicant/Professional Driver’s License;</li>
+            <li>Voter's ID/Voter's Certification from the local COMELEC office;</li>
+            <li>Inspection Clearance on Road Worthiness issued by the Traffic Management Unit;</li>
+            <li>For purchase of second hand motorcycle units, duly notarized Deed of Absolute Sale.</li>
+        </ol>
+        <p style="text-align: justify;">I hereby certify that all information given above, as well as the information contained in the attachment of this application are true and correct. I acknowledge also that my misrepresentation on my party may be ground for the disapproval of this application and/or revocation of the Provisional Authority that may be granted.</p>
+    </section>
+
+    <!-------------------------- SIGNATURE -------------------------->
+    <footer style="margin-top:50px; font-size: 10pt;">
+        <table style="width: 100%; border: none;">
+            <tr>
+                <!-- Applicant signature -->
+                <td style="width: 50%; border: none; padding: 0; vertical-align: top; text-align: center;">
+                    <p style="margin: 55px 0 0 0;">
+                        <span style="display: inline-block; min-width:300px; border-bottom:1px solid #000; text-align:center; font-weight:bold; padding-bottom: 2px;">
+                        {{ operator_name }}
+                        </span>
+                    </p>
+                    <p style="font-weight:normal; font-style:italic; margin-top:2px; text-align: center; font-size: 10pt;">(Signature of the Applicant over Printed Name)</p>
+                </td>
+                
+                <!-- Mayor approval signature -->
+                <td style="width: 50%; border: none; padding: 0; padding-left: 60px; vertical-align: top; text-align: center;">
+                    <p style="font-weight:bold; margin-bottom:40px; font-size: 11pt;">
+                    APPROVED:
+                    </p>
+                    <p style="margin: 0;">
+                        <span style="font-weight:bold; font-size: 10pt;">
+                        REX MANUEL C. TANJUATCO
+                        </span>
+                    </p>
+                    <p style="font-weight:normal; margin-top:2px; font-size: 10pt;">Municipal Mayor</p>
+                </td>
+            </tr>
+        </table>
+    </footer>
+
+    <!-------------------------- FORM 1 CERTIFIED TRUE COPY -------------------------->
+    <!-------------------------- HEADER -------------------------->
+    <header style="page-break-before: always;">
+        <div class="logo" style="position: absolute; left: 170px;">
+            <img src="/static/tanay_logo.png" alt="tanay_logo">
+        </div>
+        <div class="header-title" style="font-family: 'Century Gothic', sans-serif; font-size: 12pt;">
+            <p style="font-weight: bold;">Republic of the Philippines</p>
+            <p style="font-size: 11pt;">Province of Rizal</p>
+            <p style="font-weight: bold;">Municipality of Tanay</p>
+        </div>
+    </header>
+    <p style="font-family: 'Century Gothic', sans-serif; font-size: 18pt; font-weight: bold; text-align: center; margin-bottom: 10px;">OFFICE OF THE MAYOR</p>
+
+    <!-------------------------- REGISTRATION -------------------------->
+    <section class="registration" style="position: relative;">
+        <div style="border: 2px solid #000; position: absolute; top: -110px; right: -25px; padding: 8px; width: 200px;">
+            <div style="font-size: 9pt; margin-bottom: 6px;">
+                <span style="display: inline-block; width: 100px;">Registration No.:</span>
+                <span style="display: inline-block; width: 80px; border-bottom: 1px solid #000;">{{ registration_no }}</span>
+            </div>
+            <div style="font-size: 9pt; margin-bottom: 6px;">
+                <span style="display: inline-block; width: 100px;">Date of Reg:</span>
+                <span style="display: inline-block; width: 80px; border-bottom: 1px solid #000;">{{ registration_date }}</span>
+            </div>
+            <div style="font-size: 9pt; margin-bottom: 6px;">
+                <span style="display: inline-block; width: 100px;">Expiry Date:</span>
+                <span style="display: inline-block; width: 80px; border-bottom: 1px solid #000;">{{ expiration_date }}</span>
+            </div>
+            <div style="font-size: 9pt; margin-bottom: 6px;">
+                <span style="display: inline-block; width: 100px;">Amount Paid:</span>
+                <span style="display: inline-block; width: 80px; border-bottom: 1px solid #000;">{{ total_amount }}</span>
+            </div>
+            <div style="font-size: 9pt;">
+                <span style="display: inline-block; width: 100px;">OR No./Date Paid:</span>
+                <span style="display: inline-block; width: 80px; border-bottom: 1px solid #000;">{{ or_no_date }}</span>
+            </div>
+        </div>
+    </section>
+
+    <!-------------------------- TITLE -------------------------->
+    <section class="title">
+        <p style="font-family: 'Times New Roman', Times, serif, sans-serif; font-weight: bold; margin: 30px 0;">Form 1</p>
+        <p style="font-weight: bold; text-align: center; font-size: 13pt;">MUNICIPAL TRICYCLE OPERATOR’S PERMIT REGULATORY BOARD</p>
+        <p style="font-weight: bold; text-align: center; font-size: 12pt; margin-top:10px">PROVISIONAL AUTHORITY FOR<br>MOTORIZED TRICYCLE OPERATOR’S PERMIT (MTOP)</p>
+        <p style="text-align: center;">== == == == == == == == == == == == == == == == == == == == ==</p>
+    </section>
+
+    <!-------------------------- APPLICANT -------------------------->
+    <section class="applicant" style="font-size:10pt; font-weight:bold; margin:10px 0;">
+    <p style="position:relative; margin:5px 0;">
+        Name of Applicant/Operator:
+        <span style="display:inline-block; width:300px; border-bottom:1px solid #000;">&nbsp;</span>
+        <span style="position:absolute; left:210px; top: -3px; font-weight:normal; font-weight: bold;">{{ operator_name }}</span>
+    </p>
+
+    <p style="position:relative; margin:5px 0;">
+        Residence Address:
+        <span style="display:inline-block; width:500px; border-bottom:1px solid #000;">&nbsp;</span>
+        <span style="position:absolute; left:140px; top: -3px; font-weight:normal;">
+        {{ address }}
+        </span>
+    </p>
+
+    <p style="font-weight:normal; margin-top:5px; font-size: 10pt; text-align: justify;">
+        Herein applicant/operator is hereby granted provisional authority to operate a motorized tricycle-for-hire within the Municipality of Tanay, Rizal, using one (1) unit tricycle described as follows:
+    </p>
+    </section>
+
+    <!-------------------------- UNIT -------------------------->
+    <section class="unit" style="margin-bottom: 10px;">
+        <table>
+        <tr style="font-size: 10pt;">
+            <th style="width: 10%;">MAKE</th>
+            <th style="width: 10%;">MODEL</th>
+            <th style="width: 20%;">MOTOR NO.</th>
+            <th style="width: 20%;">CHASSIS NO.</th>
+            <th style="width: 15%;">LTO PLATE NO.</th>
+            <th style="width: 25%;">MTOP PLATE NO. TODA NO.</th>
+        </tr>
+        <tr style="font-size: 10pt; font-weight: bold;">
+            <td>{{ make }}</td><td>{{ year_model }}</td><td>{{ motor_no }}</td><td>{{ chassis_no }}</td>
+            <td>{{ plate_no }}</td><td>{{ mtop_plate }}</td>
+        </tr>
+        </table>
+    </section>
+
+    <!-------------------------- VALIDITY -------------------------->
+    <section style="margin-bottom: 10px; font-size: 10pt;">
+        <p style="font-family: 'Times New Roman', Times, serif, sans-serif; font-weight: bold; text-align: justify;">Validity: This Motorized Tricycle Operator’s Permit (MTOP) shall be valid for a period of two (2) years.</p>
+        <p style="text-align: justify;">MTOP not renewed after two (2) years from expiry date shall be deemed cancelled/revoked (per Section 94 and 101 of Municipal Ordinance No. 22, S-2019)</p>
+    </section>
+
+    <!-------------------------- T&C -------------------------->
+    <section style="margin-bottom: 10px; font-size: 10pt;">
+        <p style="font-weight: bold; text-align: justify;">Subject to the following terms and conditions per Sections 96 (c) and 97 of Municipal Ordinance No. 22, S-2019: </p>
+        <p style="margin-bottom: 10px;">The MTOP grantee shall </p>
+        <ol style="list-style: decimal; list-style-position: outside; padding-left: 25px; margin-bottom: 10px; text-align: justify;">
+            <li>Provide the unit with trash can;</li>
+            <li>Carry a common carrier’s insurance sufficient to answer for any liability it may incur to passengers and third parties in case of accidents; employ drivers duly licensed by the Land Transportation Office (LTO), who at all times wear the prescribed ID for proper identification;</li>
+            <li>Report in writing to the Board, if they intend to stop service completely, or suspend service for more than one (1) month;</li>
+            <li>Comply with the Number Coding Scheme and prescribed mudguard size (1 foot x 2 feet), and place of display;</li>
+            <li>Collect only the fare rate allowed by applicable local ordinances, rules and regulations;</li>
+            <li>Register the tricycle unit with the LTO Field Office with jurisdiction over the Municipality of Tanay;</li>
+            <li>Comply with existing laws, ordinances, policies, rules and regulations for tricycle-for-hire services as well as with the terms and conditions stated herein. Non-compliance therewith shall be sufficient cause for the suspension or cancellation/revocation of this Provisional Authority.</li>
+        </ol>
+        <p style="font-weight: bold; text-align: justify;">Prohibited Acts per Section 99 of Municipal Ordinance No. 22, S-2019. The following acts are strictly prohibited:</p>
+        <ol style="list-style: decimal; list-style-position: outside; padding-left: 25px; text-align: justify;">
+            <li>No tricycle operator and/or driver shall operate within the Municipality without the required Motorized Tricycle Operator’s Permit (MTOP).</li>
+            <li>No tricycle operator/driver shall carry more than three (3) passengers, likewise he shall be held liable for overloading.</li>
+            <li>No tricycle operator/driver shall be allowed to operate his unit if he is under the influence of intoxicating beverages or prohibited drugs.</li>
+            <li>No tricycles shall operate on national highways utilized by 4 wheel vehicles greater than 4 tons and where normal speed exceeds 40 KPH.</li>                   
+        </ol>
+    </section>
+
+    <!-------------------------- SIGNATURE -------------------------->
+    <footer style="margin-top:30px;">
+        <table style="width: 100%; border: none;">
+            <tr>
+                <!-- Applicant signature -->
+                <td style="width: 50%; border: none; padding: 0; vertical-align: top;">
+                    <p style="font-weight:bold; margin-bottom:40px; font-size: 10pt;">
+                    CONFORME:
+                    </p>
+                    <p style="margin: 0; text-align: center;">
+                        <span style="font-size: 10pt; display: inline-block; min-width:250px; border-bottom:1px solid #000; text-align:center; font-weight:bold; padding-bottom: 2px;">
+                        {{ operator_name }}
+                        </span>
+                    </p>
+                    <p style="font-weight:normal; font-style:italic; margin-top:2px; text-align: center; font-size: 10pt;">(Signature of the Applicant over Printed Name)</p>
+                </td>
+                
+                <!-- Mayor approval signature -->
+                <td style="width: 50%; border: none; padding: 0; padding-left: 60px; vertical-align: top;">
+                    <p style="font-weight:bold; margin-bottom:40px; font-size: 10pt;">
+                    CERTIFIED TRUE COPY:
+                    </p>
+                    <p style="margin: 0;">
+                        <span style="font-weight:bold; font-size: 10pt;">
+                        REX MANUEL C. TANJUATCO
+                        </span>
+                    </p>
+                    <p style="font-weight:normal; margin-top:2px; font-size: 10pt;">Municipal Mayor</p>
+                </td>
+            </tr>
+        </table>
+      </footer>
+      <div style="margin-top:30px;">
+          <table style="width: 100%; border: none;">
+              <tr>
+                  <td style="border: none; padding: 0; text-align: center;">
+                      <div style="border: 1px solid #000; display: inline-block; padding: 8px 18px; font-size: 10pt;">
+                          <div style="font-weight: bold; margin-bottom: 6px;">"DOCUMENTARY STAMP TAX PAID"</div>
+                          <table style="width: 100%; border: none;">
+                              <tr>
+                                  <td style="border: none; text-align: center; padding: 0 12px;">
+                                      <div style="border-bottom: 1px solid #000; min-width: 120px;">{{ or_no }}</div>
+                                      <div style="font-size: 9pt;">(GOR SERIAL NUMBER)</div>
+                                  </td>
+                                  <td style="border: none; text-align: center; padding: 0 12px;">
+                                      <div style="border-bottom: 1px solid #000; min-width: 120px;">{{ or_date }}</div>
+                                      <div style="font-size: 9pt;">(DATE OF PAYMENT)</div>
+                                  </td>
+                              </tr>
+                          </table>
+                      </div>
+                  </td>
+              </tr>
+          </table>
+      </div>
+
+    <!-------------------------- FORM 2 CERTIFIED TRUE COPY -------------------------->
+    <!-------------------------- HEADER -------------------------->
+    <header style="page-break-before: always;">
+        <div class="logo" style="position: absolute; left: 170px;">
+            <img src="/static/tanay_logo.png" alt="tanay_logo">
+        </div>
+        <div class="header-title" style="font-family: 'Century Gothic', sans-serif; font-size: 12pt;">
+            <p style="font-weight: bold;">Republic of the Philippines</p>
+            <p style="font-size: 11pt;">Province of Rizal</p>
+            <p style="font-weight: bold;">Municipality of Tanay</p>
+        </div>
+    </header>
+    <p style="font-family: 'Century Gothic', sans-serif; font-size: 18pt; font-weight: bold; text-align: center; margin-bottom: 10px;">OFFICE OF THE MAYOR</p>
+
+    <!-------------------------- REGISTRATION -------------------------->
+    <section class="registration" style="position: relative;">
+        <div style="border: 2px solid #000; position: absolute; top: -110px; right: 0; padding: 8px; width: 170px;">
+            <div style="font-size: 9pt; font-weight: bold; margin-bottom: 8px;">TYPE OF APPLICATION:</div>
+            <div style="font-size: 9pt; margin-bottom: 6px;">
+                <span style="display: inline-block; width: 70px;">NEW</span>
+                <span style="display: inline-block; width: 10px; text-align: center;">:</span>
+                <span style="display: inline-block; ">{{ application_type_new }}</span>
+            </div>
+            <div style="font-size: 9pt; margin-bottom: 6px;">
+                <span style="display: inline-block; width: 70px;">RENEWAL</span>
+                <span style="display: inline-block; width: 10px; text-align: center;">:</span>
+                <span style="display: inline-block; ">{{ application_type_renewal }}</span>
+            </div>
+            <div style="font-size: 9pt;">
+                <span style="display: inline-block;"><strong>Registration No: </strong>{{ registration_no }}</span>
+        </div>
+    </section>
+
+    <!-------------------------- TITLE -------------------------->
+    <section class="title">
+        <p style="font-family: 'Times New Roman', Times, serif, sans-serif; font-weight: bold; margin: 30px 0;">Form 2</p>
+        <p style="font-weight: bold; text-align: center; font-size: 12pt; margin-bottom: 10px;">MUNICIPAL TRICYCLE OPERATOR’S PERMIT REGULATORY BOARD</p>
+        <p style="font-weight: bold; text-align: center; font-size: 11pt;">APPLICATION FORM FOR PROVISIONAL AUTHORITY<br>FOR MOTORIZED TRICYCLE OPERATOR’S PERMIT (MTOP)</p>
+        <p style="text-align: center;">== == == == == == == == == == == == == == == == == == == == ==</p>
+    </section>
+
+    <!-------------------------- APPLICANT -------------------------->
+    <section class="applicant" style="font-size:10pt; font-weight:bold; margin:10px 0;">
+    <p style="position:relative; margin:5px 0;">
+        Name of Applicant:
+        <span style="display:inline-block; width:300px; border-bottom:1px solid #000;">&nbsp;</span>
+        <span style="position:absolute; left:140px; top: -3px; font-weight:normal; font-weight: bold;">{{ operator_name }}</span>
+    </p>
+
+    <p style="position:relative; margin:5px 0;">
+        Residence Address:
+        <span style="display:inline-block; width:500px; border-bottom:1px solid #000;">&nbsp;</span>
+        <span style="position:absolute; left:140px; top: -4px; font-weight:normal;">
+        {{ address }}
+        </span>
+    </p>
+
+    <p style="font-weight:normal; margin-top:5px; font-size: 10pt;"><strong>Number of unit/s applied for:</strong> One (1) unit ONLY</p>
+    </section>
+    <!-------------------------- UNIT -------------------------->
+    <section class="unit" style="margin-bottom: 10px; font-size: 10pt;">
+        <table>
+        <tr style="font-size: 10pt;">
+            <th style="width: 10%;">MAKE</th>
+            <th style="width: 10%;">MODEL</th>
+            <th style="width: 20%;">MOTOR NO.</th>
+            <th style="width: 20%;">CHASSIS NO.</th>
+            <th style="width: 15%;">LTO PLATE NO.</th>
+            <th style="width: 25%;">MTOP PLATE NO. TODA NO.</th>
+        </tr>
+        <tr style="font-size: 10pt; font-weight: bold;">
+            <td>{{ make }}</td><td>{{ year_model }}</td><td>{{ motor_no }}</td><td>{{ chassis_no }}</td>
+            <td>{{ plate_no }}</td><td>{{ mtop_plate }}</td>
+        </tr>
+        </table>
+    </section>
+
+
+    <!-------------------------- DETAILS -------------------------->
+    <section class="applicant" style="font-size:10pt; font-weight:bold; margin:10px 0;">
+        <table style="width: 100%; border: none;">
+            <tr>
+                <td style="width: 50%; border: none; padding: 0; vertical-align: top;">
+                    <p style="position:relative; margin:5px 0;">
+                        Date of Registration:
+                        <span style="position:absolute; left:150px; display:inline-block; width:150px; border-bottom:1px solid #000;">&nbsp;</span>
+                        <span style="position:absolute; left:150px; top:-2px;">{{ registration_date }}</span>
+                    </p>
+                    <p style="position:relative; margin:5px 0;">
+                        Expiry Date/Validity:
+                        <span style="position:absolute; left:150px; display:inline-block; width:150px; border-bottom:1px solid #000;">&nbsp;</span>
+                        <span style="position:absolute; left:150px; top:-2px;">{{ expiration_date }}</span>
+                    </p>
+                    <p style="position:relative; margin:5px 0;">
+                        Amount Paid:
+                        <span style="position:absolute; left:150px; display:inline-block; width:150px; border-bottom:1px solid #000;">&nbsp;</span>
+                        <span style="position:absolute; left:150px; top:-2px;">{{ total_amount }}</span>
+                    </p>
+                    <p style="position:relative; margin:5px 0;">
+                        OR No./Date Paid:
+                        <span style="position:absolute; left:150px; display:inline-block; width:150px; border-bottom:1px solid #000;">&nbsp;</span>
+                        <span style="position:absolute; left:150px; top:-2px;">{{ or_no_date }}</span>
+                    </p>
+                </td>
+                <td style="width: 50%; border: none; padding: 0; vertical-align: top;">
+                    <p style="position:relative; margin:5px 0;">
+                        CTC NO.:
+                        <span style="position:absolute; left:120px; display:inline-block; width:150px; border-bottom:1px solid #000;">&nbsp;</span>
+                        <span style="position:absolute; left:120px; top:-2px;">{{ ctc_no }}</span>
+                    </p>
+                    <p style="position:relative; margin:5px 0;">
+                        DATE ISSUED:
+                        <span style="position:absolute; left:120px; display:inline-block; width:150px; border-bottom:1px solid #000;">&nbsp;</span>
+                        <span style="position:absolute; left:120px; top:-2px;">{{ ctc_date }}</span>
+                    </p>
+                    <p style="position:relative; margin:5px 0;">
+                        PLACE ISSUED:
+                        <span style="position:absolute; left:120px; display:inline-block; width:150px; border-bottom:1px solid #000;">&nbsp;</span>
+                        <span style="position:absolute; left:120px; top:-2px;">Tanay, Rizal</span>
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </section>
+    <!-------------------------- T&C -------------------------->
+    <section style="margin-bottom: 10px; font-size: 10pt;">
+        <p style="margin-bottom: 10px; text-align: justify;">In compliance with Section 93 of Municipal Ordinance No. 22, S-2019 of the Municipality of Tanay, Rizal, I hereby attached the following documents:</p>
+        <ol style="list-style: decimal; list-style-position: outside; padding-left: 25px; margin-bottom: 10px;">
+            <li>Barangay Certification indicating the actual residency of the applicant and provision of a garage;</li>
+            <li>Current Year Community Tax Certificate;</li>
+            <li>LTO issued Official Receipt and Certificate of Registration;</li>
+            <li>TODA Certification;</li>
+            <li>Valid Identification Card of applicant/Professional Driver’s License;</li>
+            <li>Voter's ID/Voter's Certification from the local COMELEC office;</li>
+            <li>Inspection Clearance on Road Worthiness issued by the Traffic Management Unit;</li>
+            <li>For purchase of second hand motorcycle units, duly notarized Deed of Absolute Sale.</li>
+        </ol>
+        <p style="text-align: justify;">I hereby certify that all information given above, as well as the information contained in the attachment of this application are true and correct. I acknowledge also that my misrepresentation on my party may be ground for the disapproval of this application and/or revocation of the Provisional Authority that may be granted.</p>
+    </section>
+
+    <!-------------------------- SIGNATURE -------------------------->
+    <footer style="margin-top:50px; font-size: 10pt;">
+        <table style="width: 100%; border: none;">
+            <tr>
+                <!-- Applicant signature -->
+                <td style="width: 50%; border: none; padding: 0; vertical-align: top; text-align: center;">
+                    <p style="margin: 55px 0 0 0;">
+                        <span style="display: inline-block; min-width:300px; border-bottom:1px solid #000; text-align:center; font-weight:bold; padding-bottom: 2px;">
+                        {{ operator_name }}
+                        </span>
+                    </p>
+                    <p style="font-weight:normal; font-style:italic; margin-top:2px; text-align: center; font-size: 10pt;">(Signature of the Applicant over Printed Name)</p>
+                </td>
+                
+                <!-- Mayor approval signature -->
+                <td style="width: 50%; border: none; padding: 0; padding-left: 60px; vertical-align: top; text-align: center;">
+                    <p style="font-weight:bold; margin-bottom:40px; font-size: 10pt;">
+                    CERTIFIED TRUE COPY:
+                    </p>
+                    <p style="margin: 0;">
+                        <span style="font-weight:bold; font-size: 10pt;">
+                        REX MANUEL C. TANJUATCO
+                        </span>
+                    </p>
+                    <p style="font-weight:normal; margin-top:2px; font-size: 10pt;">Municipal Mayor</p>
+                </td>
+            </tr>
+        </table>
+      </footer>
+      <div style="margin-top:30px;">
+          <table style="width: 100%; border: none;">
+              <tr>
+                  <td style="border: none; padding: 0; text-align: center;">
+                      <div style="border: 1px solid #000; display: inline-block; padding: 8px 18px; font-size: 10pt;">
+                          <div style="font-weight: bold; margin-bottom: 6px;">"DOCUMENTARY STAMP TAX PAID"</div>
+                          <table style="width: 100%; border: none;">
+                              <tr>
+                                  <td style="border: none; text-align: center; padding: 0 12px;">
+                                      <div style="border-bottom: 1px solid #000; min-width: 120px;">{{ or_no }}</div>
+                                      <div style="font-size: 9pt;">(GOR SERIAL NUMBER)</div>
+                                  </td>
+                                  <td style="border: none; text-align: center; padding: 0 12px;">
+                                      <div style="border-bottom: 1px solid #000; min-width: 120px;">{{ or_date }}</div>
+                                      <div style="font-size: 9pt;">(DATE OF PAYMENT)</div>
+                                  </td>
+                              </tr>
+                          </table>
+                      </div>
+                  </td>
+              </tr>
+          </table>
+      </div>
+    <div style="position: fixed; bottom: 20px; left: 20px;">
+        <img src="{{ qr_code_path }}" width="120" height="120" alt="QR Code">
+    </div>
+</body>
+</html>

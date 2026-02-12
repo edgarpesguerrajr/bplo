@@ -4,6 +4,29 @@ require_once 'config.php';
 $successMessage = '';
 $errorMessage = '';
 
+// Capture filter parameters for cancel button
+$searchTerm = trim($_GET['q'] ?? '');
+$barangayFilter = trim($_GET['barangay'] ?? '');
+$statusFilter = trim($_GET['status'] ?? '');
+$sortBy = $_GET['sortBy'] ?? 'franchise_no';
+$sortDir = $_GET['sortDir'] ?? 'DESC';
+
+// Build filter suffix for cancel button
+$filterQueryParams = [];
+if ($searchTerm !== '') {
+    $filterQueryParams['q'] = $searchTerm;
+}
+if ($barangayFilter !== '') {
+    $filterQueryParams['barangay'] = $barangayFilter;
+}
+if ($statusFilter !== '') {
+    $filterQueryParams['status'] = $statusFilter;
+}
+$filterQueryParams['sortBy'] = $sortBy;
+$filterQueryParams['sortDir'] = $sortDir;
+$filterQuery = http_build_query($filterQueryParams);
+$filterSuffix = $filterQuery !== '' ? '&' . $filterQuery : '';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Franchisee Information
     $franchise_no = trim($_POST['franchisee_no'] ?? '');
@@ -427,7 +450,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'added') {
                     <!------- SAVE CANCEL ------->
                     <div class="form-row-2">
                         <button type="submit" class="btn submit-btn">Save</button>
-                        <a href="template.php?page=documents" class="btn cancel-btn" style="text-align: center;">Cancel</a>
+                        <a href="template.php?page=documents<?php echo $filterSuffix; ?>" class="btn cancel-btn" style="text-align: center;">Cancel</a>
                     </div>
 
 

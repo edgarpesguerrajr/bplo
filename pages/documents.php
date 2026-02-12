@@ -90,7 +90,7 @@ if ($page > $totalPages) {
 $documents = [];
 $perPage = (int)$perPage;
 $offset = (int)$offset;
-$listSql = "SELECT id, franchise_no, franchisee_first_name, franchisee_last_name, barangay, expiration_date
+$listSql = "SELECT id, franchise_no, franchisee_first_name, franchisee_middle_name, franchisee_last_name, franchisee_ext_name, barangay, expiration_date
             FROM documents
             {$whereSql}
             ORDER BY {$sortBy} {$sortDir}
@@ -110,6 +110,22 @@ if ($stmt) {
     }
     $stmt->close();
 }
+
+// Build filter suffix for maintaining search state across page navigation
+$filterQueryParams = [];
+if ($hasSearch) {
+    $filterQueryParams['q'] = $searchTerm;
+}
+if ($barangayFilter !== '') {
+    $filterQueryParams['barangay'] = $barangayFilter;
+}
+if ($statusFilter !== '') {
+    $filterQueryParams['status'] = $statusFilter;
+}
+$filterQueryParams['sortBy'] = $sortBy;
+$filterQueryParams['sortDir'] = $sortDir;
+$filterQuery = http_build_query($filterQueryParams);
+$filterSuffix = $filterQuery !== '' ? '&' . $filterQuery : '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -326,7 +342,7 @@ if ($stmt) {
                         ?>
                         <tr>
                             <td><?php echo htmlspecialchars($doc['franchise_no'] ?? ''); ?></td>
-                            <td><?php echo htmlspecialchars(trim(($doc['franchisee_first_name'] ?? '') . ' ' . ($doc['franchisee_last_name'] ?? ''))); ?></td>
+                            <td><?php echo htmlspecialchars(trim(($doc['franchisee_first_name'] ?? '') . ' ' . ($doc['franchisee_middle_name'] ?? '') . ' ' . ($doc['franchisee_last_name'] ?? '') . ' ' . ($doc['franchisee_ext_name'] ?? ''))); ?></td>
                             <td><?php echo htmlspecialchars($doc['barangay'] ?? ''); ?></td>
                             <td>
                                 <span class="badge <?php echo $statusClass; ?>">
@@ -334,13 +350,13 @@ if ($stmt) {
                                 </span>
                             </td>
                             <td>
-                                <a class="action-btn" title="View" href="template.php?page=view_document&id=<?php echo (int)$doc['id']; ?>">
+                                <a class="action-btn" title="View" href="template.php?page=view_document&id=<?php echo (int)$doc['id']; ?><?php echo $filterSuffix; ?>">
                                     <span class="material-symbols-outlined">visibility</span>
                                 </a>
-                                <a class="action-btn" title="Edit" href="template.php?page=edit_document&id=<?php echo (int)$doc['id']; ?>">
+                                <a class="action-btn" title="Edit" href="template.php?page=edit_document&id=<?php echo (int)$doc['id']; ?><?php echo $filterSuffix; ?>">
                                     <span class="material-symbols-outlined">edit_document</span>
                                 </a>
-                                <a class="action-btn" title="Delete" href="template.php?page=documents&delete=<?php echo (int)$doc['id']; ?>" onclick="return confirm('Delete this franchise record?');">
+                                <a class="action-btn" title="Delete" href="template.php?page=documents&delete=<?php echo (int)$doc['id']; ?><?php echo $filterSuffix; ?>" onclick="return confirm('Delete this franchise record?');">
                                     <span class="material-symbols-outlined">delete</span>
                                 </a>
                             </td>
@@ -354,21 +370,6 @@ if ($stmt) {
             <?php
                 $startItem = $totalDocuments === 0 ? 0 : $offset + 1;
                 $endItem = min($offset + $perPage, $totalDocuments);
-                $filterQueryParams = [];
-                if ($hasSearch) {
-                    $filterQueryParams['q'] = $searchTerm;
-                }
-                if ($barangayFilter !== '') {
-                    $filterQueryParams['barangay'] = $barangayFilter;
-                }
-                if ($statusFilter !== '') {
-                    $filterQueryParams['status'] = $statusFilter;
-                }
-                // Add sort parameters
-                $filterQueryParams['sortBy'] = $sortBy;
-                $filterQueryParams['sortDir'] = $sortDir;
-                $filterQuery = http_build_query($filterQueryParams);
-                $filterSuffix = $filterQuery !== '' ? '&' . $filterQuery : '';
             ?>
             <span>Showing <?php echo $startItem; ?>-<?php echo $endItem; ?> of <?php echo $totalDocuments; ?></span>
             <div id="pagination-controls" class="pagination-controls">
